@@ -53,10 +53,9 @@ class CsvReader:
         user_data = self.add_info()
 
         for el in res:
-            print(el['телефон'], str(user_data[2]))
             if el['телефон'] == str(user_data[2]):
                 print("Пользователь с таким телефоном уже существует")
-            return
+                return
 
         new_user = {'имя': user_data[0], 'фамилия': user_data[1], 'телефон': user_data[2]}
         res.append(new_user)
