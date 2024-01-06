@@ -65,6 +65,17 @@ class CsvReader:
             f_writer.writeheader()
             f_writer.writerows(res)
 
+    def copy_string(self, filename, string_number):
+
+        user_data = self.read_file()
+
+        print(user_data[string_number])
+        user_data = user_data[string_number]
+
+        with open(filename, 'a') as file_to_append:
+            f_writer = DictWriter(file_to_append, fieldnames=['имя', 'фамилия', 'телефон'])
+            f_writer.writerows([user_data])
+
 
 file_name = 'phone.csv'
 
@@ -85,7 +96,13 @@ def main():
                 continue
             print(*csv_reader.read_file())
         elif command == 'c':
-            pass
+            string_number = int(input("Введите номер строки который вы хотите скопировать: "))
+            file_to_copy = 'copy.csv'
+
+            if not exists(file_to_copy):
+                csv_reader.create_file()
+
+            csv_reader.copy_string(file_to_copy, string_number)
 
 
 if __name__ == "__main__":
